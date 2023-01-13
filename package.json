@@ -1,5 +1,13 @@
 {
   "name": "splat-proxy-ql",
   "lockfileVersion": 2,
-  "requires": true
+  "requires": true,
+  "scripts": {
+    "dev": "concurrently npm:dev:netlify npm:dev:firestore",
+    "dev:netlify": "BROWSER=none npx netlify-cli dev",
+    "dev:firestore": "npx firebase-tools --project=proxy-ql-splat-report-local emulators:start --only firestore --export-on-exit --import=.emulators/firestore"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
 }

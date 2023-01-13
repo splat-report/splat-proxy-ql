@@ -1,20 +1,10 @@
-import { initializeApp } from "firebase/app";
 import {
-  addDoc,
-  collection,
+  CollectionReference,
   doc,
-  getFirestore,
   serverTimestamp,
+  addDoc,
   setDoc,
 } from "firebase/firestore";
-
-const GOOGLE_CLOUD_PROJECT = Deno.env.get("GOOGLE_CLOUD_PROJECT");
-
-const app = initializeApp({
-  projectId: GOOGLE_CLOUD_PROJECT,
-});
-
-const db = getFirestore(app);
 
 type SessionId = string;
 
@@ -22,10 +12,8 @@ export function makeSessionId(): SessionId {
   return crypto.randomUUID();
 }
 
-const qlCollectionRef = collection(db, "proxy");
-const sessionCollectionRef = collection(db, "sessions");
-
 export async function pushProxyed(
+  qlCollectionRef: CollectionReference,
   sessionId: SessionId,
   query,
   response,

@@ -8,7 +8,7 @@ MAKEFLAGS += --warn-undefined-variables
 
 .PHONY: dev
 dev:
-	BROWSER=none npx netlify-cli dev
+	npm run dev
 
 
 .PHONY: deploy-preview

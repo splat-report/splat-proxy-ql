@@ -1,24 +1,8 @@
 import { Context } from "https://edge.netlify.com/";
 import { collectData } from "./collection/collect.ts";
-import { PersistedQuery } from "./query-types/persisted-query.ts";
-export type Query = {
-  persistedQuery: PersistedQuery;
-  variables: { [key: string]: any };
-};
-
-type QueryResponse__XMatch = {
-  data: {
-    detail: {
-      xBattleHistories: {
-        [key: string]: any;
-      };
-    };
-  };
-};
-
-interface PersistedQueryResponse {
-  [PersistedQuery.XMatch]: QueryResponse__XMatch;
-}
+import { PersistedQuery, PersistedQueriesHashes } from "./types/persisted-query.ts";
+import { GraphQLResponse } from "./types/response-types.ts";
+import { makeDataCollectionOptions } from './collection/options.ts'
 
 class KnownError extends Error {
   constructor(underlying, public status = 400) {
@@ -50,13 +34,16 @@ async function onRequestOptions(request: Request) {
 
 async function onRequestPost(request: Request, isDev = false) {
   try {
-    const query = await request.json<Query>().catch((error) => {
+    const query = await request.json().catch((error) => {
       throw asErrRes("Failed to parse request body");
     });
     if (!Reflect.has(query, "persistedQuery")) {
       return asErrRes(
         "Invalid query: must be in the form of { persistedQuery: ..., variables: ...}",
       );
+    }
+    if (!PersistedQueriesHashes[query.persistedQuery]) {
+      console.warn("Specified query hash is unknown", query.persistedQuery);
     }
 
     const bulletToken = getBulletToken(request);
@@ -111,20 +98,6 @@ function getBulletToken(request: Request) {
   return bearer.substring("Bearer ".length);
 }
 
-function makeDataCollectionOptions(request: Request) {
-  const url = new URL(request.url);
-
-  return {
-    allow: isAllowingValue(url.searchParams.get("allow-data-collection")),
-    sessionId: url.searchParams.get("data-collection-session") ??
-      crypto.randomUUID(),
-  };
-
-  function isAllowingValue(v: string | null) {
-    return ["true", "1"].includes(v ?? "no");
-  }
-}
-
 const SPLANET_API_ENDPOINT =
   "https://api.lp1.av5ja.srv.nintendo.net/api/graphql";
 
@@ -141,10 +114,7 @@ function makeBulletHeaders(token: string) {
   };
 }
 
-async function fetchQL<
-  Q extends Query,
-  ResT extends PersistedQueryResponse[Q["persistedQuery"]],
->(query: Query, token: string, isDev = false) {
+async function fetchQL(query: PersistedQuery, token: string, isDev = false): Promise<GraphQLResponse<unknown>> {
   const headers = makeBulletHeaders(token);
 
   const persistedQueryHash = query.persistedQuery;
