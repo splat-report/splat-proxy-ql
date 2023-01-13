@@ -68,7 +68,15 @@ async function onRequestPost(request: Request, isDev = false) {
 
     const data = await fetchQL(query, bulletToken, isDev);
     if (dataCollectionOptions.allow) {
-      await collectData(query, data, dataCollectionOptions, isDev);
+      try {
+        await collectData(query, data, dataCollectionOptions, isDev);
+      } catch (error) {
+        if (isDev) {
+          console.error(error);
+        } else {
+          console.error("Failed to collect data", '' + error);
+        }
+      }
     }
 
     return Response.json(data);
