@@ -5,9 +5,9 @@ import {
 
 export import PersistedQuery = Queries;
 
-export const PersistedQueriesHashes = Object.entries(PersistedQuery).map((
-  [_, value],
-) => value);
+export const PersistedQueriesReverse = Object.fromEntries(Object.entries(PersistedQuery).map((
+  [name, value],
+) => [value, name]))
 
 export type Query = {
   persistedQuery: PersistedQuery,

@@ -29,6 +29,5 @@ const qlCollectionRef = collection(db, "proxy");
 const sessionCollectionRef = collection(db, "sessions");
 
 export async function collectData(query, data, options, isDev = false) {
-  console.log("recording!");
   await pushProxyed(qlCollectionRef, options.sessionId, query, data, {});
 }

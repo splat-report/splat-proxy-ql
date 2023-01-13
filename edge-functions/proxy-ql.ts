@@ -1,7 +1,7 @@
 import { Context } from "https://edge.netlify.com/";
 import { collectData } from "./collection/collect.ts";
 import {
-  PersistedQueriesHashes,
+  PersistedQueriesReverse,
   PersistedQuery,
 } from "./types/persisted-query.ts";
 import { GraphQLResponse } from "./types/response-types.ts";
@@ -62,7 +62,7 @@ async function onRequestPost(request: Request, isDev = false) {
         "Invalid query: must be in the form of { persistedQuery: ..., variables: ...}",
       );
     }
-    if (!PersistedQueriesHashes[query.persistedQuery]) {
+    if (!PersistedQueriesReverse[query.persistedQuery]) {
       console.warn("Specified query hash is unknown", query.persistedQuery);
     }
 
