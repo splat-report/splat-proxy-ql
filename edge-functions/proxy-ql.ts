@@ -1,8 +1,11 @@
 import { Context } from "https://edge.netlify.com/";
 import { collectData } from "./collection/collect.ts";
-import { PersistedQuery, PersistedQueriesHashes } from "./types/persisted-query.ts";
+import {
+  PersistedQueriesHashes,
+  PersistedQuery,
+} from "./types/persisted-query.ts";
 import { GraphQLResponse } from "./types/response-types.ts";
-import { makeDataCollectionOptions } from './collection/options.ts'
+import { makeDataCollectionOptions } from "./collection/options.ts";
 
 class KnownError extends Error {
   constructor(underlying, public status = 400) {
@@ -10,17 +13,34 @@ class KnownError extends Error {
   }
 }
 
+async function withCommonHeaders(f:() => Promise<Response>) {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS, HEAD, POST",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+  };
+
+  const res = await f();
+  for (const [name, value] of Object.entries(headers)) {
+    res.headers.append(name, value);
+  }
+  return res;
+}
+
 export default async function (request: Request, _context: Context) {
-  if (["HEAD", "OPTIONS"].includes(request.method)) {
-    return await onRequestOptions(request);
-  }
-  if (request.method !== "POST") {
-    return new Response("Method Not Allowed", {
-      status: 405,
-    });
-  }
-  const isDev = Deno.env.get("NETLIFY_DEV") === "true";
-  return await onRequestPost(request, isDev);
+  return await withCommonHeaders(async() => {
+    if (["HEAD", "OPTIONS"].includes(request.method)) {
+      return await onRequestOptions(request);
+    }
+    if (request.method !== "POST") {
+      return new Response("Method Not Allowed", {
+        status: 405,
+      });
+    }
+    const isDev = Deno.env.get("NETLIFY_DEV") === "true";
+    return await onRequestPost(request, isDev);
+  });
 }
 
 async function onRequestOptions(request: Request) {
@@ -61,7 +81,7 @@ async function onRequestPost(request: Request, isDev = false) {
         if (isDev) {
           console.error(error);
         } else {
-          console.error("Failed to collect data", '' + error);
+          console.error("Failed to collect data", "" + error);
         }
       }
     }
@@ -114,7 +134,11 @@ function makeBulletHeaders(token: string) {
   };
 }
 
-async function fetchQL(query: PersistedQuery, token: string, isDev = false): Promise<GraphQLResponse<unknown>> {
+async function fetchQL(
+  query: PersistedQuery,
+  token: string,
+  isDev = false,
+): Promise<GraphQLResponse<unknown>> {
   const headers = makeBulletHeaders(token);
 
   const persistedQueryHash = query.persistedQuery;

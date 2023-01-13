@@ -18,14 +18,6 @@ to = "https://proxy-ql.splat.report/:splat"
 status = 301
 force = true
 
-[[headers]]
-for = "/api/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "OPTIONS, HEAD, POST"
-    Access-Control-Allow-Headers = "Content-Type"
-    Access-Control-Max-Age = "86400"
-
 [[edge_functions]]
 path = "/api/proxy-ql"
 function = "proxy-ql"
