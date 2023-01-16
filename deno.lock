@@ -224,6 +224,7 @@
     "https://edge.netlify.com/bootstrap/site.ts": "92469673f289c124a9985c7027dc6c166364371b209b5a674aa05d482ad5583b",
     "https://edge.netlify.com/bootstrap/stage_2.ts": "aec0414b2abce6b75d6b57f0fedbed9f39479553dc950e0eb54669e589363c1a",
     "https://edge.netlify.com/bootstrap/util/named_wrapper.ts": "a2b16dc9a8e8fb07509b5cfe29203eebd5bfaafe7589669bae544c8d4d606934",
+    "https://esm.sh/boolean@3.2.0": "ef912637c54606fdad47542898c4fc02081d2c517d9cdf68cc6e60d5ee9265ea",
     "https://esm.sh/firebase@9.15.0/app": "506025f2d7f1a78107d235fa0c691e5dc113a04df58b64fc57d2eaa934f881fd",
     "https://esm.sh/firebase@9.15.0/firestore": "31cdb2899d4c235109097c6ba288953c1e9d1b6cbf9ab0c19749516660047268",
     "https://esm.sh/v102/@firebase/app@0.9.0/deno/app.js": "e273c5212980f182cafab8f08e225f3bcd981037c97c53779d27c76aeb075c38",
@@ -242,6 +243,10 @@
     "https://esm.sh/v102/@firebase/util@1.8.0/deno/util.js": "d26bef37f33ad8e0fbbeb5639942634c815e9c7bde292104baa7a64e963da31f",
     "https://esm.sh/v102/@firebase/util@1.8.0/dist/util-public.d.ts": "85492578f66bde8656299142f05fcfa2ae6b5cced6c3a4315e16188d2a7227e1",
     "https://esm.sh/v102/@firebase/webchannel-wrapper@0.9.0/deno/webchannel-wrapper.js": "daddf59c20ebb7d9fa1fbe46415babdd97ae00798d980d452d99d8c7e51b147d",
+    "https://esm.sh/v102/boolean@3.2.0/build/lib/boolean.d.ts": "ec1f962827c9169e897b132ae071ee04cb9606e05e34a29cce759411e3bafe9c",
+    "https://esm.sh/v102/boolean@3.2.0/build/lib/index.d.ts": "f1f962f304f62fb3af39cdca495b34aed2b89bee22437eaee3c281761cc39142",
+    "https://esm.sh/v102/boolean@3.2.0/build/lib/isBooleanable.d.ts": "b462fffd839f8b2e4f35ae5d8ae83669fa1895ef02488cd0459c8ae5bc332aee",
+    "https://esm.sh/v102/boolean@3.2.0/deno/boolean.js": "f330b0fdefb14ef276e2243ac458a975748574314390182a4daac5cf363ed7da",
     "https://esm.sh/v102/firebase@9.15.0/app/dist/app/index.d.ts": "dd1b8c287c9effe45744ce56172956120f821be3c7b6fe66cb4b1c75257e2aa5",
     "https://esm.sh/v102/firebase@9.15.0/deno/app.js": "34f6e657d5ce2f8431b646cbc613b0d786a04f730374ba27de3698c5148df85d",
     "https://esm.sh/v102/firebase@9.15.0/deno/firestore.js": "7e69c11337f47fc47a576fe2508f37f33c463e0b40bdd856918f054d5501d97e",
@@ -254,5 +259,14 @@
     "https://raw.githubusercontent.com/spacemeowx2/s3si.ts/main/src/state.ts": "900d754358bd11d414d454e41374d7ae6c7134e7b6d584599fb55981ac8dccb5",
     "https://raw.githubusercontent.com/spacemeowx2/s3si.ts/main/src/types.ts": "efc6f50d92e5b9d6f7999239cb13b579786bd2a98076984536f74a1d3791a19c",
     "https://raw.githubusercontent.com/spacemeowx2/s3si.ts/main/src/utils.ts": "2d4503ef7bba3e352c076e4f1af0e9e38bc5172a878dfdba7b9d4c131a7ff466"
+  },
+  "npm": {
+    "specifiers": { "boolean": "boolean@3.2.0" },
+    "packages": {
+      "boolean@3.2.0": {
+        "integrity": "sha512-d0II/GO9uf9lfUHH2BQsjxzRJZBdsjgsBiW4BvhWk/3qoKwQFjIDVN19PfX8F2D/r9PCMTtLWjYVCFrpeYUzsw==",
+        "dependencies": {}
+      }
+    }
   }
 }

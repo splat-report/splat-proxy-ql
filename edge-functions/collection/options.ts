@@ -1,4 +1,4 @@
-import { boolean as looksTrue } from 'https://esm.sh/boolean';
+import { boolean as looksTrue } from 'npm:boolean';
 
 export function makeDataCollectionOptions(request: Request) {
   const url = new URL(request.url);
