@@ -20,7 +20,6 @@ export async function pushProxyed(
   annotations,
 ) {
   const data = {
-    sessionId,
     created: serverTimestamp(),
     query: query,
     response: {
@@ -32,6 +31,7 @@ export async function pushProxyed(
   };
 
   const dataRef = await addDoc(qlCollectionRef, data);
+  return dataRef;
 
   //const sessionQlRef = doc(collection(doc(sessionCollectionRef, sessionId), 'ql'), dataRef.id);
   //await setDoc(sessionQlRef, dataRef);
