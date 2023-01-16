@@ -5,7 +5,6 @@ export function makeDataCollectionOptions(request: Request) {
 
   return {
     allow: looksTrue(url.searchParams.get("allow-data-collection")),
-    sessionId: url.searchParams.get("data-collection-session") ??
-      crypto.randomUUID(),
+    sessionId: url.searchParams.get("data-collection-session") || crypto.randomUUID(),
   };
 }
