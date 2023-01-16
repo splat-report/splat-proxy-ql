@@ -61,9 +61,7 @@ export async function collectData(query, data, options, isDev = false) {
     annotations,
   );
 
-  await setDoc(dedupDoc, {
-    id: d.id,
-  });
+  await setDoc(dedupDoc, {/*exists true*/});
 }
 
 async function sha256Hash(data: string) {
