@@ -122,7 +122,7 @@ const SPLANET_API_ENDPOINT =
   "https://api.lp1.av5ja.srv.nintendo.net/api/graphql";
 
 const LANG = "ja-JP";
-const IKSM_WEBVIEW_VERSION = "2.0.0-bd36a652";
+const IKSM_WEBVIEW_VERSION = "4.0.0-091d4283";
 
 function makeBulletHeaders(token: string) {
   return {
