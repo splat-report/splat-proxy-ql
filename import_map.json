@@ -1,8 +1,0 @@
-{
-  "imports": {
-    "firebase-admin/app": "https://esm.sh/firebase-admin/app",
-    "firebase-admin/firestore": "https://esm.sh/firebase-admin/firestore",
-    "firebase/firestore": "https://esm.sh/firebase/firestore",
-    "firebase/app": "https://esm.sh/firebase/app"
-  }
-}

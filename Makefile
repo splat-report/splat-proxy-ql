@@ -8,6 +8,7 @@ MAKEFLAGS += --warn-undefined-variables
 
 .PHONY: dev
 dev:
+	deno cache edge-functions/*.ts
 	npm run dev
 
 
@@ -32,4 +33,4 @@ lint:
 
 .PHONY: clean
 clean:
-	rm -rf .netlify
+	rm -rf .netlify node_modules

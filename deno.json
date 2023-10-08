@@ -1,7 +1,8 @@
 {
   "fmt": {
-    "files": {
-      "exclude": [".netlify"]
-    }
+    "include": ["edge-functions"]
+  },
+  "lint": {
+    "include": ["edge-functions"]
   }
 }
