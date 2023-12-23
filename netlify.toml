@@ -2,6 +2,11 @@
 publish = "site/"
 edge_functions = "./edge-functions"
 
+[[headers]]
+for = "/v2/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"
+
 [[edge_functions]]
 path = "/api/proxy-ql"
 function = "proxy-ql"

@@ -1,9 +1,6 @@
 import type {Config} from "@netlify/functions";
-import {queries} from "../src/constants.mts"
 
 const DEV = Deno.env.get("NETLIFY_LOCAL") === "true";
-
-console.log(queries)
 
 export const config: Config = {
   method: "POST",
@@ -26,18 +23,12 @@ type RequestBody = {
 
 export default async (req: Request) => {
   try {
-    return commonResponse(await handleRequest(req));
+    return await handleRequest(req);
   } catch (err) {
     errorLogIfDev(err);
-    return commonResponse(createErrorResponse('' + err));
+    return createErrorResponse('' + err);
   }
 }
-
-function commonResponse(res: Response) {
-  res.headers.set("Access-Control-Allow-Origin", "*");
-  return res;
-}
-
 
 function createErrorResponse(reason: string, options = {status: 400}) {
   const body = {errors: [reason]};
