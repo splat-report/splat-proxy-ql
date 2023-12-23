@@ -3,7 +3,7 @@ import type {Config} from "@netlify/functions";
 const DEV = Deno.env.get("NETLIFY_LOCAL") === "true";
 
 export const config: Config = {
-  method: "POST",
+  method: ["POST"],
   path: "/v2/ql",
 };
 
@@ -22,12 +22,29 @@ type RequestBody = {
 
 
 export default async (req: Request) => {
+  if (req.method === "HEAD") {
+    return withResponseCommonHeaders(new Response())
+  }
+
   try {
-    return await handleRequest(req);
+    return withResponseCommonHeaders(await handleRequest(req));
   } catch (err) {
     errorLogIfDev(err);
-    return createErrorResponse('' + err);
+    return withResponseCommonHeaders(createErrorResponse('' + err));
   }
+}
+
+function withResponseCommonHeaders(res: Response) {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS,POST",
+    "Access-Control-Allow-Headers": "*",
+  };
+
+  for (const [name, value] of Object.entries(headers)) {
+    res.headers.set(name, value);
+  }
+  return res;
 }
 
 function createErrorResponse(reason: string, options = {status: 400}) {
