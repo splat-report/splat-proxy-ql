@@ -6,6 +6,7 @@ edge_functions = "./edge-functions"
 for = "/v2/*"
 [headers.values]
 Access-Control-Allow-Origin = "*"
+Allow = "OPTIONS,POST"
 
 [[edge_functions]]
 path = "/api/proxy-ql"
