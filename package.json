@@ -1,7 +1,9 @@
 {
   "name": "splat-proxy-ql",
   "private": true,
-  "scripts": {
-    "dev": "BROWSER=none npx netlify-cli dev"
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "netlify-cli": "^17.10.1"
   }
 }

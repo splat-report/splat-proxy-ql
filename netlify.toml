@@ -1,22 +1,6 @@
 [build]
-
+publish = "site/"
 edge_functions = "./edge-functions"
-
-[functions]
-deno_import_map = "./import_map.json"
-
-
-[[redirects]]
-from = "https://proxy-ql-splat-report.netlify.app/*"
-to = "https://proxy-ql.splat.report/:splat"
-status = 301
-force = true
-
-[[redirects]]
-from = "https://main--proxy-ql-splat-report.netlify.app/*"  # [main] is a branch name
-to = "https://proxy-ql.splat.report/:splat"
-status = 301
-force = true
 
 [[edge_functions]]
 path = "/api/proxy-ql"
