@@ -1,6 +1,5 @@
 import type {Config} from "@netlify/functions";
 import {queries} from "../src/constants.mts"
-import {common} from "https://deno.land/std@0.160.0/path/common.ts";
 
 const DEV = Deno.env.get("NETLIFY_LOCAL") === "true";
 
