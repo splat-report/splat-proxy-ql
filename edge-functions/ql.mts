@@ -34,7 +34,7 @@ export default async (req: Request) => {
 }
 
 function createErrorResponse(reason: string, options = {status: 400}) {
-  const body = {reason};
+  const body = {errors: [reason]};
   return Response.json(body, {status: options?.status ?? 400});
 }
 
