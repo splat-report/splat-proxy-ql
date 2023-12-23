@@ -1,5 +1,6 @@
 import type {Config} from "@netlify/functions";
 import {queries} from "../src/constants.mts"
+import {common} from "https://deno.land/std@0.160.0/path/common.ts";
 
 const DEV = Deno.env.get("NETLIFY_LOCAL") === "true";
 
@@ -26,12 +27,18 @@ type RequestBody = {
 
 export default async (req: Request) => {
   try {
-    return await handleRequest(req);
+    return commonResponse(await handleRequest(req));
   } catch (err) {
     errorLogIfDev(err);
-    return createErrorResponse('' + err);
+    return commonResponse(createErrorResponse('' + err));
   }
 }
+
+function commonResponse(res: Response) {
+  res.headers.set("Access-Control-Allow-Origin", "*");
+  return res;
+}
+
 
 function createErrorResponse(reason: string, options = {status: 400}) {
   const body = {errors: [reason]};
