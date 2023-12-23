@@ -22,7 +22,7 @@ type RequestBody = {
 
 
 export default async (req: Request) => {
-  if (req.method === "HEAD") {
+  if (req.method === "OPTIONS") {
     return withResponseCommonHeaders(new Response())
   }
 
