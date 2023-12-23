@@ -3,7 +3,7 @@ import type {Config} from "@netlify/functions";
 const DEV = Deno.env.get("NETLIFY_LOCAL") === "true";
 
 export const config: Config = {
-  method: ["HEAD", "POST"],
+  method: ["OPTIONS", "POST"],
   path: "/v2/ql",
 };
 
