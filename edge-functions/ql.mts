@@ -39,6 +39,7 @@ function withResponseCommonHeaders(res: Response) {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "OPTIONS,POST",
     "Access-Control-Allow-Headers": "*",
+    "Access-Control-Max-Age": "3600",
   };
 
   for (const [name, value] of Object.entries(headers)) {
